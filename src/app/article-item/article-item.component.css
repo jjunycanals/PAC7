@@ -5,6 +5,7 @@
   padding: 10px;
   margin: 5%;
   text-align: center;
+  min-height: 30vh;
 }
 
 .stock-container .name h3 {
@@ -13,6 +14,19 @@
 
 .stock-container:only-child {
   padding: 5%;
+}
+.image img {
+  max-width: 100%;
+  background-position: center;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+
+}
+
+.quantity:hover {
+  transform: scale(1.1);
 }
 
 .positive {
