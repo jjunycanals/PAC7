@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../model/article';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-article-item',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './article-item.component.html',
   styleUrl: './article-item.component.css'
 })

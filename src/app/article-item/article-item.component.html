@@ -1,9 +1,10 @@
-<div class="stock-container"
-[class]="isOnSale() ? 'positive' : 'negative'">
-  <div class="image"><img src="{{ article.imageUrl }}"> </div>
+<div class="stock-container">
+  <div class="image"><img src="{{ article.imageUrl }}"></div>
   <div class="name"><h3> {{ article.name }} </h3></div>
-  <div class="price"> {{ article.price }} €</div>
-  <div class="quantity">
+  <div class="price" [ngClass]="{'available': !isOnSale(), 'positive': isOnSale()}">
+    {{ article.price }} €
+  </div>
+  <div class="quantity" *ngIf="isOnSale()">
     <button (click)="rest()" [disabled]="checkQunatity()" [disabled]="!isOnSale()">-</button>
     {{ article.quantityInCart }}
     <button (click)="summ()" [disabled]="!isOnSale()">+</button>
