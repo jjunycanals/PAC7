@@ -1,0 +1,19 @@
+.form-group{
+    font-size: 12px;
+    margin: 10% 0;
+}
+.form-check-label {
+    padding-left: 4%;
+    margin: 2% 0;
+}
+.form-check-input{
+    margin: 4% 0;
+}
+
+.butt {
+    margin: 5% 0;
+}
+.Error {
+  color: red;
+  padding-bottom: 3%;
+}
