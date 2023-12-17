@@ -1,3 +1,12 @@
 .nav-item {
     font-size: 16px;
 }
+
+/*  Per canviar el color del link quan passem per sobre */
+.nav li a:hover {
+  background-color: #111;
+}
+/* Per saber on som de la pagina i quedi en el nav reflexat*/
+.nav .active a {
+  background-color: #2b6ebb;
+}

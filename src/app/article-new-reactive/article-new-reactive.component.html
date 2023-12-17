@@ -1,0 +1,59 @@
+<div class="form-group">
+  <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+    <div formGroupName="article">
+      <div class="mb-3">
+          <label for="name" class="form-label">Article Name:</label>
+          <input  class="form-control"
+                  type="text"
+                  placeholder="Article Name"
+                  id="name"
+                  name="name"
+                  required
+                  formControlName="name">
+      </div>
+      <div class="Error" *ngIf="errorMessages['name']">
+        {{errorMessages['name']}}
+      </div>
+      <div class="mb-3">
+          <label for="price" class="form-label">Article Price:</label>
+          <input class="form-control"
+                  type="number"
+                  placeholder="Article price"
+                  id="price"
+                  name="price"
+                  required
+                  formControlName="price">
+      </div>
+      <div class="Error" *ngIf="errorMessages['price']">
+        {{errorMessages['price']}}
+      </div>
+      <div class="mb-3">
+          <label for="imageUrl" class="form-label">Article Image:</label>
+          <input class="form-control"
+                  type="url"
+                  placeholder="https://..."
+                  id="imageUrl"
+                  name="imageUrl"
+                  required
+                  pattern="^(http|https):\/\/?(www\.)?[a-zA-Z0-9]+(\.[a-zA-Z]{2,3})\/[a-zA-Z0-9-_]+\.(jpg|jpeg|png|gif)$"
+                  (input)="validateUrl()"
+                  formControlName="imageUrl">
+      </div>
+      <div class="Error" *ngIf="errorMessages['imageUrl']">
+        {{errorMessages['imageUrl']}}
+      </div>
+      <div class="form-check form-switch">
+          <input class="form-check-input"
+                  type="checkbox"
+                  id="isOnSale"
+                  name="isOnSale"
+                  formControlName="isOnSale">
+          <label for="isOnSale" class="form-check-label">Is On Sale?</label>
+      </div>
+    </div>
+    <div class="butt">
+      <div class="d-grid gap-2 col-6 mx-auto"><button type="submit" class="btn btn-primary btn-lg">Crear</button></div>
+    </div>
+
+  </form>
+</div>
