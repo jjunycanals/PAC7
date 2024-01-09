@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ArticleNewTemplateComponent } from './article-new-template/article-new-template.component';
 import { ArticleNewReactiveComponent } from './article-new-reactive/article-new-reactive.component';
 import { ArticleListComponent } from './article-list/article-list.component';
+import { ArticleServiceService } from './services/article-service.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { ArticleListComponent } from './article-list/article-list.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ArticleServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

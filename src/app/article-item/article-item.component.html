@@ -9,4 +9,12 @@
     {{ article.quantityInCart }}
     <button (click)="summ()" [disabled]="!isOnSale()">+</button>
   </div>
+  <div class="stock">{{article.stock}} </div>
+  <div [ngClass]="{'favorite': isFavorite(), 'nofavorite': !isFavorite()}">
+    <img src="../../assets/star.jpg" alt="star as favorite" class="star">
+  </div>
+  <button (click)="onToggleFavorite()"
+          *ngIf="!article.favorite" >Afegir a preferit </button>
+  <button (click)="onToggleFavorite()"
+          *ngIf="article.favorite">Eliminar de preferit</button>
 </div>

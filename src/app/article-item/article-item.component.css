@@ -40,3 +40,14 @@
 .available {
   color: gray;
 }
+
+.favorite img {
+ width: 50%;
+}
+.nofavorite img {
+  width: 20%;
+  opacity: 0.2;
+}
+.star {
+  width: 20%;
+}

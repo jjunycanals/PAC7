@@ -19,7 +19,7 @@ export class ArticleNewTemplateComponent {
   // public errorMessagesURLRegex: string | null = null;
 
   constructor(){
-    this.article = new Article('','',0,true,0);
+    this.article = new Article('','',0,true,0,0,false);
   }
 
   createArticleNewTemplate(articleForm: NgForm):void{

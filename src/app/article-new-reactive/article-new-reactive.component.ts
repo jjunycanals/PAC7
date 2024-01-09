@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { ArticleServiceService } from '../services/article-service.service';
 
 @Component({
   selector: 'app-article-new-reactive',
@@ -14,6 +15,8 @@ import { Validators, FormBuilder, AbstractControl } from '@angular/forms';
 export class ArticleNewReactiveComponent {
   public errorMessages: { [key: string]: string } = {};
   public articleForm!: FormGroup;
+  public message: string | undefined;
+  public articleServiceService!: ArticleServiceService;
 
   constructor(private fb: FormBuilder) {
     this.articleForm = this.fb.group({
@@ -29,7 +32,17 @@ export class ArticleNewReactiveComponent {
   onSubmit() {
     this.errorMessages = {};
     if (this.articleForm.valid) {
-      console.log('Article Created Form Value', this.articleForm.value);
+      // console.log('Article Created Form Value', this.articleForm.value);
+
+      let created = this.articleServiceService.createArticle(this.articleForm.value.article);
+      if (created) {
+        this.message = 'Successfully create article with name: '
+            + this.articleForm.value.article['name'];
+        // this.articleForm =  new Stock('', '', 0, 0, 'NASDAQ');
+      } else {
+        this.message = 'article with name: ' + this.articleForm.value.article.name
+            + ' already exists';
+      }
     } else {
       const obj = this.articleForm.controls['article'].value;
       Object.keys(obj).forEach(key => {
