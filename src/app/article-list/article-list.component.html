@@ -1,6 +1,6 @@
 <div class="stock-container">
   <ul class="content">
-    <li *ngFor="let article of articles" class="art">
+    <li *ngFor="let article of articles$ | async" class="art">
       <app-article-item [article]="article" (ArticleQuantityChange)="handleQuantityChange($event)"></app-article-item>
     </li>
   </ul>

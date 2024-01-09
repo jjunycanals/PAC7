@@ -16,9 +16,8 @@ export class ArticleNewReactiveComponent {
   public errorMessages: { [key: string]: string } = {};
   public articleForm!: FormGroup;
   public message: string | undefined;
-  public articleServiceService!: ArticleServiceService;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private articleServiceService: ArticleServiceService) {
     this.articleForm = this.fb.group({
       article: this.fb.group({
         name: [null, [Validators.required, this.nameArticleValidator]],
@@ -33,16 +32,19 @@ export class ArticleNewReactiveComponent {
     this.errorMessages = {};
     if (this.articleForm.valid) {
       // console.log('Article Created Form Value', this.articleForm.value);
-
-      let created = this.articleServiceService.createArticle(this.articleForm.value.article);
-      if (created) {
-        this.message = 'Successfully create article with name: '
-            + this.articleForm.value.article['name'];
-        // this.articleForm =  new Stock('', '', 0, 0, 'NASDAQ');
-      } else {
-        this.message = 'article with name: ' + this.articleForm.value.article.name
-            + ' already exists';
-      }
+      let created = this.articleServiceService.createArticle(this.articleForm.value.article).subscribe(
+        (created: boolean) => {
+          console.log(created);
+          if (created) {
+            this.message = 'Successfully create article with name: '
+                + this.articleForm.value.article['name'];
+            // this.articleForm =  new Stock('', '', 0, 0, 'NASDAQ');
+          } else {
+            this.message = 'article with name: ' + this.articleForm.value.article.name
+                + ' already exists';
+          }
+        }
+      );
     } else {
       const obj = this.articleForm.controls['article'].value;
       Object.keys(obj).forEach(key => {
@@ -71,5 +73,4 @@ export class ArticleNewReactiveComponent {
     }
     return null;
   }
-
 }

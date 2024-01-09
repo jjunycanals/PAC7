@@ -1,6 +1,5 @@
 <div class="form-group">
   <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
-    <div *ngIf="message">{{message}}</div>
     <div formGroupName="article">
       <div class="mb-3">
           <label for="name" class="form-label">Article Name:</label>
@@ -55,6 +54,6 @@
     <div class="butt">
       <div class="d-grid gap-2 col-6 mx-auto"><button type="submit" class="btn btn-primary btn-lg">Crear</button></div>
     </div>
-
+    <div *ngIf="message" class="messagepos">{{message}}</div>
   </form>
 </div>
