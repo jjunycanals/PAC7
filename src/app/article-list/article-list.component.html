@@ -1,7 +1,15 @@
+<span>Buscar: </span><input (input)="search()" type="search" placeholder="Search..">
 <div class="stock-container">
   <ul class="content">
-    <li *ngFor="let article of articles$ | async" class="art">
-      <app-article-item [article]="article" (ArticleQuantityChange)="handleQuantityChange($event)"></app-article-item>
-    </li>
+    <ng-container *ngIf="!(searchResults$ | async)?.length; else searchResultsTemplate">
+      <li class="art" *ngFor="let article of articles$ | async" >
+        <app-article-item [article]="article" (ArticleQuantityChange)="handleQuantityChange($event)"></app-article-item>
+      </li>
+    </ng-container>
+    <ng-template #searchResultsTemplate>
+      <li class="art" *ngFor="let article of searchResults$ | async">
+        <app-article-item [article]="article" (ArticleQuantityChange)="handleQuantityChange($event)"></app-article-item>
+      </li>
+    </ng-template>
   </ul>
 </div>

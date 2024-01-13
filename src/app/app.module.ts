@@ -9,6 +9,8 @@ import { ArticleNewTemplateComponent } from './article-new-template/article-new-
 import { ArticleNewReactiveComponent } from './article-new-reactive/article-new-reactive.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { ArticleServiceService } from './services/article-service.service';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { DefaultImagePipe } from './article-item/default-image.pipe';
 
 @NgModule({
   declarations: [
@@ -17,14 +19,16 @@ import { ArticleServiceService } from './services/article-service.service';
     ArticleListComponent,
     NavbarComponent,
     ArticleNewTemplateComponent,
-    ArticleNewReactiveComponent
+    ArticleNewReactiveComponent,
+    DefaultImagePipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [ArticleServiceService],
+  providers: [ArticleServiceService, provideHttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
