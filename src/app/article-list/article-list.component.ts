@@ -14,13 +14,14 @@ import { FormControl } from '@angular/forms';
     imports: [CommonModule, ArticleItemComponent]
 })
 export class ArticleListComponent {
-  searchControl = new FormControl();
   public searchResults$!: Observable<Article[]>;
   public articles$!: Observable<Article[]>;
+  public event!: any;
 
   constructor(private articleServiceService: ArticleServiceService) { }
   ngOnInit() {
     this.articles$ = this.articleServiceService.getArticle();
+    this.search(event);
   }
 
   handleQuantityChange(event: { article: Article, quantity: number }) {
@@ -35,12 +36,9 @@ export class ArticleListComponent {
     }
   }
 
-  search(){
-    this.searchResults$ = this.searchControl.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap((query) => this.articleServiceService.searchArticles(query))
-    );
+  search(event: any) {
+    // console.log(event.value);
+    this.searchResults$ = this.articleServiceService.searchArticles(event.value);
   }
 
 }

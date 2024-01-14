@@ -1,4 +1,9 @@
-<span>Buscar: </span><input (input)="search()" type="search" placeholder="Search..">
+<h4>Buscar: </h4>
+<input type="text"
+placeholder="Search.."
+class="form-control"
+(change)="search($event.target)"
+>
 <div class="stock-container">
   <ul class="content">
     <ng-container *ngIf="!(searchResults$ | async)?.length; else searchResultsTemplate">

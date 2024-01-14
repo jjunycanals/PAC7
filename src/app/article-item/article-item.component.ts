@@ -21,7 +21,7 @@ export class ArticleItemComponent {
   constructor(private articleServiceService: ArticleServiceService) {  }
 
   ngOnInit() {
-    this.defaultImage = '../../assets/images/default.jpg';
+    this.defaultImage = '../../assets/images/default.svg';
   }
 
   isOnSale() {

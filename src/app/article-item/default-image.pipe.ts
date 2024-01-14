@@ -6,6 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 export class DefaultImagePipe implements PipeTransform {
   transform(value: string): string {
-    return value || '../../assets/images/default.jpg';
+    return value || '../../assets/images/default.svg';
   }
 }
