@@ -8,8 +8,7 @@ const articles = [
     imageUrl: 'assets/images/article1.jpg',
     price: 19.95,
     isOnSale: false,
-    favorite: false,
-    quantityInCart: 3
+    quantityInCart: 0
   },
   {
     id: 2,
@@ -17,8 +16,7 @@ const articles = [
     imageUrl: '',
     price: 6.15,
     isOnSale: true,
-    favorite: false,
-    quantityInCart: 6
+    quantityInCart: 0
   },
   {
     id: 3,
@@ -26,8 +24,7 @@ const articles = [
     imageUrl: 'assets/images/article3.jpg',
     price: 31.9,
     isOnSale: false,
-    favorite: false,
-    quantityInCart: 6
+    quantityInCart: 0
   }
 ];
 
@@ -63,17 +60,14 @@ router.post('/', (req, res) => {
 
   article.id = articles.length + 1;
   article.quantityInCart = 0;
-  article.favorite = false;
   articles.push(article);
   return res.status(200).json(article);
 });
 
 router.patch('/:id', (req, res) => {
   const articleId = req.params.id;
-  console.log(articleId);
   const foundArticle = articles.find(({ id }) => id == articleId);
   if (foundArticle) {
-    console.log(foundArticle);
     const changeInQuantity = req.body.changeInQuantity;
     foundArticle.quantityInCart += changeInQuantity;
     return res.status(200).json({ msg: 'Successfully updated cart' });
