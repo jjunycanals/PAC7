@@ -1,76 +1,64 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Validators, FormBuilder, AbstractControl } from '@angular/forms';
-import { ArticleServiceService } from '../services/article-service.service';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { Article } from "src/app/models/article";
+import { NameArticleValidator } from 'src/app/validators/name-article-validator';
+import { ArticleService } from 'src/app/services/article.service';
+
 
 @Component({
   selector: 'app-article-new-reactive',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './article-new-reactive.component.html',
-  styleUrl: './article-new-reactive.component.css'
+  styleUrls: ['./article-new-reactive.component.css']
 })
-
 export class ArticleNewReactiveComponent {
-  public errorMessages: { [key: string]: string } = {};
-  public articleForm!: FormGroup;
-  public message: string | undefined;
 
-  constructor(private fb: FormBuilder, private articleServiceService: ArticleServiceService) {
-    this.articleForm = this.fb.group({
-      article: this.fb.group({
-        name: [null, [Validators.required, this.nameArticleValidator]],
-        price: [null, [Validators.required, Validators.min(0.1)]],
-        imageUrl: [null, [Validators.required, Validators.pattern(/^(http|https):\/\/?(www\.)?[a-zA-Z0-9]+(\.[a-zA-Z]{2,3})\/[a-zA-Z0-9-_]+\.(jpg|jpeg|png|gif)$/)]],
-        isOnSale: [false]
-      })
+  @Output() private articleNew: EventEmitter<void> = new EventEmitter();
+
+  public message = "";
+
+  public article : FormGroup;
+  
+  constructor(private fb: FormBuilder,
+    private articleService: ArticleService) {
+    this.createForm();
+  }
+
+
+  createForm() {
+    this.article = this.fb.group({
+      name: ["", [Validators.required, NameArticleValidator.nameArticleValidator]],
+      price: [0, [Validators.required, Validators.min(1)]],
+      imageUrl: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern("^http(s?)://[a-zA-Z0-9-.]+.[a-zA-Z]{2,3}(/S*)?$")
+        ]
+      ],
+      isOnSale: false
     });
   }
 
-  onSubmit() {
-    this.errorMessages = {};
-    if (this.articleForm.valid) {
-      // console.log('Article Created Form Value', this.articleForm.value);
-      let created = this.articleServiceService.createArticle(this.articleForm.value.article).subscribe(
-        (created: boolean) => {
-          console.log(created);
-          if (created) {
-            this.message = 'Successfully create article with name: '
-                + this.articleForm.value.article['name'];
-            // this.articleForm =  new Stock('', '', 0, 0, 'NASDAQ');
-          } else {
-            this.message = 'article with name: ' + this.articleForm.value.article.name
-                + ' already exists';
-          }
-        }
-      );
+  createWine() {
+    if (this.article.valid) {
+      console.log("Se han recogido los datos del formulario correctamente");
+      let wine = {
+        id: null,
+        name: this.article.value.name,
+        imageUrl: this.article.value.imageUrl,
+        price: this.article.value.price,
+        foodPairing: [],
+        isOnSale: this.article.value.isOnSale,
+        quantityInCart: 0
+      }
+      this.articleService.create(wine)
+        .subscribe((msg) => {
+          console.log(msg);
+          this.articleNew.next();
+        }, (err) => console.error(err));
     } else {
-      const obj = this.articleForm.controls['article'].value;
-      Object.keys(obj).forEach(key => {
-        if (this.articleForm.controls['article'].get(`${key}`)?.hasError('required') == true) {
-          this.errorMessages[key] = `${key} is requireddd`;
-        } else if (this.articleForm.controls['article'].get(`${key}`)?.hasError('pattern') && key === 'imageUrl')  {
-          this.errorMessages[key] = 'URL not valid';
-        } else if (this.articleForm.controls['article'].get(`${key}`)?.hasError('min') && key === 'price') {
-          this.errorMessages[key] = 'Price must be at least 0.1';
-        } else if (this.articleForm.controls['article'].get(`${key}`)?.hasError('invalidName') == true) {
-          this.errorMessages[key] = `The word ${this.articleForm.controls['article'].value['name']} is an invalid name.`;
-        }
-      });
+      console.error("Formulario inválido");
     }
-
-  }
-  validateUrl(): void {
-    if (this.errorMessages['imageUrl']) {
-      this.errorMessages['imageUrl'] = '';
-    }
-  }
-  nameArticleValidator(Control: { value: string; }): { [s: string]: boolean } | null {
-    const invalidNames = ['Prova', 'Test', 'Mock', 'Fake'];
-    if (invalidNames.includes(Control.value)) {
-      return { 'invalidName': true };
-    }
-    return null;
   }
 }

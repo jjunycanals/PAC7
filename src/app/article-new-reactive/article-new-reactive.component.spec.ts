@@ -8,10 +8,12 @@ describe('ArticleNewReactiveComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ArticleNewReactiveComponent]
+      declarations: [ ArticleNewReactiveComponent ]
     })
     .compileComponents();
-    
+  });
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(ArticleNewReactiveComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

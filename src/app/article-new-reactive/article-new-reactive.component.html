@@ -1,59 +1,83 @@
-<div class="form-group">
-  <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
-    <div formGroupName="article">
-      <div class="mb-3">
-          <label for="name" class="form-label">Article Name:</label>
-          <input  class="form-control"
-                  type="text"
-                  placeholder="Article Name"
-                  id="name"
-                  name="name"
-                  required
-                  formControlName="name">
+<h3>
+    Create Wine
+  </h3>
+  
+  <div>
+    <h4 class="error">{{ message }}</h4>
+    <form [formGroup]="article" (ngSubmit)="createWine()" >
+      <div>
+        <div>
+          <input
+            type="text"
+            name="name"
+            placeholder="Wine Name"
+            formControlName="name"
+            required
+          />
+        </div>
+        <div
+          class="error"
+          *ngIf="
+            (article.get('name').dirty || message) &&
+            article.get('name').invalid
+          "
+        >
+          <div *ngIf="article.get('name').errors?.['required']">
+            Wine name is required
+          </div>
+          <div *ngIf="article.get('name').errors?.['wineNameValid']">
+            Wine name is invalid
+          </div>
+        </div>
+        <div>
+          <input
+            type="number"
+            name="price"
+            placeholder="Wine Price"
+            formControlName="price"
+          />
+        </div>
+        <div
+          class="error"
+          *ngIf="
+            (article.get('price').dirty || message) &&
+            article.get('price').invalid
+          "
+        >
+          <div *ngIf="article.get('price').errors?.['required']">
+            Wine price is required
+          </div>
+          <div *ngIf="article.get('price').errors?.['min']">
+            Wine price must be at least 1
+          </div>
+        </div>
+        <div>
+          <input
+            type="text"
+            name="imageUrl"
+            placeholder="Wine Image URL"
+            formControlName="imageUrl"
+          />
+        </div>
+        <div
+          class="error"
+          *ngIf="
+            (article.get('imageUrl').dirty || message) &&
+            article.get('imageUrl').invalid
+          "
+        >
+          <div *ngIf="article.get('imageUrl').errors?.['required']">
+            Wine Image URL is required
+          </div>
+          <div *ngIf="article.get('imageUrl').errors?.['pattern']">
+            Wine Image URL does not seem to be a valid URL
+          </div>
+        </div>
+        <div>
+          <input type="checkbox" formControlName="isOnSale" name="isOnSale" />On
+          Sale
+        </div>
       </div>
-      <div class="Error" *ngIf="errorMessages['name']">
-        {{errorMessages['name']}}
-      </div>
-      <div class="mb-3">
-          <label for="price" class="form-label">Article Price:</label>
-          <input class="form-control"
-                  type="number"
-                  placeholder="Article price"
-                  id="price"
-                  name="price"
-                  required
-                  formControlName="price">
-      </div>
-      <div class="Error" *ngIf="errorMessages['price']">
-        {{errorMessages['price']}}
-      </div>
-      <div class="mb-3">
-          <label for="imageUrl" class="form-label">Article Image:</label>
-          <input class="form-control"
-                  type="url"
-                  placeholder="https://..."
-                  id="imageUrl"
-                  name="imageUrl"
-                  required
-                  pattern="^(http|https):\/\/?(www\.)?[a-zA-Z0-9]+(\.[a-zA-Z]{2,3})\/[a-zA-Z0-9-_]+\.(jpg|jpeg|png|gif)$"
-                  (input)="validateUrl()"
-                  formControlName="imageUrl">
-      </div>
-      <div class="Error" *ngIf="errorMessages['imageUrl']">
-        {{errorMessages['imageUrl']}}
-      </div>
-      <div class="form-check form-switch">
-          <input class="form-check-input"
-                  type="checkbox"
-                  id="isOnSale"
-                  name="isOnSale"
-                  formControlName="isOnSale">
-          <label for="isOnSale" class="form-check-label">Is On Sale?</label>
-      </div>
-    </div>
-    <div class="butt">
-      <div class="d-grid gap-2 col-6 mx-auto"><button type="submit" class="btn btn-primary btn-lg">Crear</button></div>
-    </div>
-    <div *ngIf="message" class="messagepos">{{message}}</div>
-  </form>
-</div>
+      <button type="submit">Create</button>
+    </form>
+  </div>

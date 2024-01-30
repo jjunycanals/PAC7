@@ -1,22 +1,81 @@
-<div class="container-fluid">
-    <a class="navbar-brand" href="../../index.html"><img src="../../favicon.ico" alt="angular logo"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav" id="nav">
-        <li class="nav-item">
-        <a class="nav-link" (click)="showComponent('article-list')">Home</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" (click)="showComponent('article-list')">Articles</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" (click)="showComponent('article-new-template')">Article New Template</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" (click)="showComponent('article-new-reactive')">New Reactive Article</a>
-        </li>
-    </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <!-- <a class="navbar-brand" (click)="mostraArticleList()">Inicio</a>
+        <button class="navbar-toggler" type="button" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" (click)="mostraArticleList()">Articulos</a>
+                <a class="nav-link" (click)="mostraFormReactive()">Nuevo articulo reactive</a>
+            </div>
+        </div>
+        <span class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+      </span>
+      <span class="nav-item">
+          <a class="nav-link" href="/register">Register</a>
+      </span>
+      <span class="nav-item">
+          <a class="nav-link" href="article-list">Article List</a>
+      </span> -->
+        <a class="navbar-brand" href="../../index.html"><img src="../../favicon.ico" alt="angular logo"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav" id="nav">
+        <!-- <li class="nav-item">
+          <a class="nav-link" (click)="mostraArticleList()">Home</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" (click)="mostraArticleList()">Articles</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" (click)="mostraFormTemplate()">Article New Template</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" (click)="mostraFormReactive()">New Reactive Article</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" (click)="mostraLogin()">Login</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" (click)="mostraRegister()">Register</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" (click)="mostraArticleDetail()">Article List</a>
+          </li> -->
+          <li class="nav-item">
+          <a class="nav-link" (click)="showComponent('article-list')">Home</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" (click)="showComponent('article-list')">Articles</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" (click)="showComponent('article-new-template')">Article New Template</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" (click)="showComponent('article-new-reactive')">New Reactive Article</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" (click)="showComponent('login')">Login</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" (click)="showComponent('register')">Register</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" (click)="showComponent('article-detail')">Article List</a>
+          </li>
+      </ul>
+      </div>
     </div>
+</nav>
+<BR>
+<div class="content">
+  <div class="left-side">
+    <app-article-list *ngIf="opcioArticleList"></app-article-list>
+    <app-article-new-reactive *ngIf="opcioFormReactive"></app-article-new-reactive>
+  </div>
+
 </div>

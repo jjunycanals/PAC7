@@ -1,34 +1,43 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { ArticleItemComponent } from './article-item/article-item.component';
+
 import { NavbarComponent } from './navbar/navbar.component';
-import { ArticleNewTemplateComponent } from './article-new-template/article-new-template.component';
-import { ArticleNewReactiveComponent } from './article-new-reactive/article-new-reactive.component';
 import { ArticleListComponent } from './article-list/article-list.component';
-import { ArticleServiceService } from './services/article-service.service';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
-import { DefaultImagePipe } from './article-item/default-image.pipe';
+import { ArticleNewReactiveComponent } from './article-new-reactive/article-new-reactive.component';
+import { ArticleItemComponent } from './article-item/article-item.component';
+import { ImageArticlePipe } from './pipes/image-article.pipe';
+import { AppRoutesModule } from './app-routes.module';
+import { ArticleNewTemplateComponent } from "./article-new-template/article-new-template.component";
+import { LoginComponent } from "./login/login.component";
+import { ArticleDetailComponent } from "./article-detail/article-detail.component";
+import { CreateArticleComponent } from "./create-article/create-article.component";
+import { RegisterComponent } from "./register/register.component";
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ArticleItemComponent,
-    ArticleListComponent,
-    NavbarComponent,
-    ArticleNewTemplateComponent,
-    ArticleNewReactiveComponent,
-    DefaultImagePipe
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ],
-  providers: [ArticleServiceService, provideHttpClient],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NavbarComponent,
+        ArticleListComponent,
+        ArticleNewReactiveComponent,
+        ArticleItemComponent,
+        ImageArticlePipe
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, AppRoutesModule,
+        ArticleNewTemplateComponent,
+        LoginComponent,
+
+        ArticleDetailComponent,
+        CreateArticleComponent,
+
+        RegisterComponent
+    ]
 })
 export class AppModule { }

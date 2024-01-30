@@ -1,21 +1,16 @@
-<div class="stock-container">
-  <div class="image" *ngIf="article.imageUrl !== ''"><img [src]="article.imageUrl"></div>
-  <div class="image" *ngIf="article.imageUrl === ''"><img [src]="defaultImage"></div>
-  <div class="name"><h3> {{ article.name }} </h3></div>
-  <div class="price" [ngClass]="{'available': !isOnSale(), 'positive': isOnSale()}">
-    {{ article.price | currency: 'EUR': 'symbol' : '1.2-2' }}
+<div class="article-item" [ngClass]="{ sale: article.isOnSale }">
+  <img [src]="article.imageUrl | imageArticle" alt="Botella de vino">
+    <div class="details">
+      <div>{{ article.name }}</div>
+      <div  [ngClass]="{ salePrice: !article.isOnSale }" >{{ article.price }} €</div>
+      <div  *ngIf="article.isOnSale">
+        <button *ngIf="article.quantityInCart > 0" (click)="decrementInCart()">
+          -
+        </button>
+  
+        <span>{{ article.quantityInCart }}</span>
+        <button (click)="incrementInCart()">+</button>
+      </div>
+    </div>
   </div>
-  <div class="quantity" *ngIf="isOnSale()">
-    <button (click)="rest()" [disabled]="checkQunatity()" [disabled]="!isOnSale()">-</button>
-    {{ article.quantityInCart }}
-    <button (click)="summ()" [disabled]="!isOnSale()">+</button>
-  </div>
-  <div class="stock">{{article.stock}} </div>
-  <div [ngClass]="{'favorite': isFavorite(), 'nofavorite': !isFavorite()}">
-    <img src="../../assets/star.jpg" alt="star as favorite" class="star">
-  </div>
-  <button (click)="onToggleFavorite()"
-          *ngIf="!article.favorite" >Afegir a preferit </button>
-  <button (click)="onToggleFavorite()"
-          *ngIf="article.favorite">Eliminar de preferit</button>
-</div>
+  

@@ -245,6 +245,22 @@
         <h3>New-Reactive-Article</h3>
         <app-article-new-reactive></app-article-new-reactive>
       </div>
+      <div *ngIf="currentComponent === 'login'">
+        <h3>Login</h3>
+        <app-login></app-login>
+      </div>
+      <div *ngIf="currentComponent === 'register'">
+        <h3>Register</h3>
+        <app-register></app-register>
+      </div>
+      <div *ngIf="currentComponent === 'create-article'">
+        <h3>New Article</h3>
+        <app-create-article></app-create-article>
+      </div>
+      <div *ngIf="currentComponent === 'article-detail'">
+        <h3>Article DETAIL</h3>
+        <app-article-detail></app-article-detail>
+      </div>
     </div>
 
   </div>
@@ -259,4 +275,3 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
-<router-outlet></router-outlet>

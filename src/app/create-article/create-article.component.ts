@@ -20,6 +20,7 @@ export class CreateArticleComponent {
 
   initializeArticles() {
     this.article =  {
+      id: 0,
       name: '',
       price: 0,
       imageUrl: '',
