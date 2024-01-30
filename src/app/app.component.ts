@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ecommerce';
-  currentComponent: string = 'article-list';
+  currentComponent: string = 'login';
   showComponent(component: string): void {
     this.currentComponent = component;
   }

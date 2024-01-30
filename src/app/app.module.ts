@@ -22,8 +22,8 @@ import { RegisterComponent } from "./register/register.component";
     declarations: [
         AppComponent,
         NavbarComponent,
+
         ArticleListComponent,
-        ArticleNewReactiveComponent,
         ArticleItemComponent,
         ImageArticlePipe
     ],
@@ -33,7 +33,7 @@ import { RegisterComponent } from "./register/register.component";
         BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, AppRoutesModule,
         ArticleNewTemplateComponent,
         LoginComponent,
-
+        ArticleNewReactiveComponent,
         ArticleDetailComponent,
         CreateArticleComponent,
 

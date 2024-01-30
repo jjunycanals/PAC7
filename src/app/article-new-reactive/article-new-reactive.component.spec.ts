@@ -11,9 +11,9 @@ describe('ArticleNewReactiveComponent', () => {
       declarations: [ ArticleNewReactiveComponent ]
     })
     .compileComponents();
-  });
+});
 
-  beforeEach(() => {
+beforeEach(() => {
     fixture = TestBed.createComponent(ArticleNewReactiveComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
