@@ -1,76 +1,44 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { Observable, Subject } from 'rxjs';
-import { debounceTime, switchMap,
-  distinctUntilChanged, startWith, merge,
-  share } from 'rxjs/operators';
-
-import { Article } from "src/app/models/article";
-import { ArticleQuantityChange } from "src/app/models/article-quantity-change";
-import { ArticleService } from 'src/app/services/article.service';
-
+import { Component, OnInit } from '@angular/core';
+import { Article } from '../model/article';
+import { CommonModule } from '@angular/common';
+import { ArticleItemComponent } from "../article-item/article-item.component";
+import { ArticleServiceService } from '../services/article-service.service';
+import { Observable, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: "app-article-list",
-  template: `
-   <div class="search">
-      <input
-        type="text" 
-        name="searchBox"
-        [(ngModel)]="searchString"
-        placeholder="Search Here"
-        (keyup)="search()">
-    </div>
-    <div class="list">
-      <div *ngFor="let article of articles$ | async">
-          <app-article-item (quantityChange) = "onQuantityChange($event)" [article]="article"></app-article-item>
-      </div>
-    </div>`,
-  styles: [`.list {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 20px;
-  }
-  .search {
-    margin-top: 20px;
-    display: flex;
-    justify-content:center;
-    align-items: center;
-  }`],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-article-list',
+    standalone: true,
+    templateUrl: './article-list.component.html',
+    styleUrl: './article-list.component.css',
+    imports: [CommonModule, ArticleItemComponent]
 })
-export class ArticleListComponent implements OnInit {
-  public articles$: Observable<Article[]>;
+export class ArticleListComponent {
+  public searchResults$!: Observable<Article[]>;
+  public articles$!: Observable<Article[]>;
+  public event!: any;
 
-  public searchString: string = '';
-  private searchTerms: Subject<string> = new Subject();
-  private reloadArticleList : Subject <void> = new Subject();
-
-  constructor(private articleService: ArticleService) { }
-
+  constructor(private articleServiceService: ArticleServiceService) { }
   ngOnInit() {
-    this.articles$ = this.searchTerms.pipe(
-      startWith(this.searchString),
-      debounceTime(500),
-      distinctUntilChanged(),
-      merge(this.reloadArticleList),
-      switchMap((q) => this.articleService.getArticles(this.searchString)));
+    this.articles$ = this.articleServiceService.getArticle();
+    this.search(event);
   }
 
-    
-  onQuantityChange(change: ArticleQuantityChange) {
-    this.articleService.changeQuantity(change.article.id, change.changeInQuantity)
-      .subscribe((res) => {
-        console.log(res.msg);
-        this.reloadArticleList.next();
+  handleQuantityChange(event: { article: Article, quantity: number }) {
+    if (this.articles$) {
+      this.articles$.subscribe((articles: any[]) => {
+        const foundArticle = articles.find(a => a.name === event.article.name);
+        if (foundArticle) {
+          console.log(foundArticle);
+          foundArticle.quantityInCart = event.quantity;
+        }
       });
+    }
   }
 
-  search() {
-    this.searchTerms.next(this.searchString);
+  search(event: any) {
+    // console.log(event.value);
+    this.searchResults$ = this.articleServiceService.searchArticles(event.value);
   }
 
-  onNew() {
-    this.reloadArticleList.next();
-  }
 }
-

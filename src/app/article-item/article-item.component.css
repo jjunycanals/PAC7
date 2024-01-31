@@ -1,18 +1,53 @@
-.article-item {
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px;
-    display: inline-block;
-  }
-  
-  .article-item .details {
-    text-align: center;
-  }
-  
-  .article-item.sale {
-    background-color: rebeccapurple;
-  }
-  
-  .salePrice {
-    color: gray;
-  }
+.stock-container {
+  border: 1px solid black;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 10px;
+  margin: 5%;
+  text-align: center;
+  min-height: 30vh;
+}
+
+.stock-container .name h3 {
+  display: inline-block;
+}
+
+.stock-container:only-child {
+  padding: 5%;
+}
+.image img {
+  max-width: 100%;
+  background-position: center;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+
+}
+
+.quantity:hover {
+  transform: scale(1.1);
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+
+.available {
+  color: gray;
+}
+
+.favorite img {
+ width: 50%;
+}
+.nofavorite img {
+  width: 20%;
+  opacity: 0.2;
+}
+.star {
+  width: 20%;
+}

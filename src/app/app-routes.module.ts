@@ -7,12 +7,15 @@ import { RegisterComponent } from './register/register.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { CreateArticleComponent } from './create-article/create-article.component';
 import { ArticleServiceService } from './services/article-service.service';
+import { ArticleDetailComponent } from './article-detail/article-detail.component';
 
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'article-list', component: ArticleListComponent },
+  { path: 'article-detail/:id', component: ArticleDetailComponent },
+  { path: 'article-detail', component: ArticleDetailComponent },
   { path: 'create-article', component: CreateArticleComponent },
   { path: 'api/articles', component: ArticleServiceService }
 ];

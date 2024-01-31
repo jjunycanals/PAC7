@@ -25,8 +25,11 @@
                   formControlName="password">
       </div>
       <div class="Error" *ngIf="errorMessages['password']">
-        {{errorMessages['price']}}
+        {{errorMessages['password']}}
       </div>
+    </div>
+    <div class="Error" *ngIf="message">
+      {{message}}
     </div>
     <div class="butt">
       <div class="d-grid gap-2 col-6 mx-auto"><button type="submit" class="btn btn-primary btn-lg">Login</button></div>

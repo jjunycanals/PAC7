@@ -1,1 +1,39 @@
-<p>register works!</p>
+<div class="form-group">
+  <form [formGroup]="registerForm" (ngSubmit)="CreateUser()">
+    <div formGroupName="register">
+      <div class="mb-3">
+          <label for="username" class="form-label">User Name:</label>
+          <input  class="form-control"
+                  type="text"
+                  placeholder="User Name"
+                  id="username"
+                  name="username"
+                  required
+                  formControlName="username">
+      </div>
+      <div class="Error" *ngIf="errorMessages['username']">
+        {{errorMessages['username']}}
+      </div>
+      <div class="mb-3">
+          <label for="password" class="form-label">Password:</label>
+          <input class="form-control"
+                  type="password"
+                  placeholder="Password"
+                  id="password"
+                  name="password"
+                  required
+                  formControlName="password">
+      </div>
+      <div class="Error" *ngIf="errorMessages['password']">
+        {{errorMessages['password']}}
+      </div>
+    </div>
+    <div class="Error" *ngIf="message">
+      {{message}}
+    </div>
+    <div class="butt">
+      <div class="d-grid gap-2 col-6 mx-auto"><button type="submit" class="btn btn-primary btn-lg">Login</button></div>
+    </div>
+  </form>
+</div>
+

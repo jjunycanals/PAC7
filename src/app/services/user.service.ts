@@ -6,16 +6,17 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-  private apiLogin = '/api/user/login';
-  private apiRegistre = '/api/user/register';
+  private apiLogin = 'http://localhost:3000/api/user/login';
+  private apiRegistre = 'http://localhost:3000/api/user/register';
 
   constructor(private httpClient: HttpClient) { }
 
   login(username: any): Observable<any> {
+    console.log('aqui');
     return this.httpClient.post<any>(this.apiLogin, username);
   }
 
-  CreateUser(user: any): Observable<any> {
-    return this.httpClient.post<any>(this.apiRegistre, user);
+  CreateUser(username: any, password: any): Observable<any> {
+    return this.httpClient.post<any>(this.apiRegistre, { username, password });
   }
 }

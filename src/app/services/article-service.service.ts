@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ArticleServiceService {
-  private apiUrl= '/api/articles';
+  private apiUrl= 'http://localhost:3000/api/articles';
   // private article: Article[];
 
   constructor(private httpClient: HttpClient) {
